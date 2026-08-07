@@ -18,7 +18,7 @@ export const transcribeRecording = createServerFn({ method: "POST" })
     const apiKey = process.env["LOVABLE_API_KEY"];
     if (!apiKey) throw new Error("Transcription service is not configured");
 
-    const { supabase, userId } = context;
+    const { supabase } = context;
 
     const { data: recording, error: recordingError } = await supabase
       .from("recordings")
