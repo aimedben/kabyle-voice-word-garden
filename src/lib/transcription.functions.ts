@@ -68,14 +68,15 @@ export const transcribeRecording = createServerFn({ method: "POST" })
 
     const { data: saved, error: saveError } = await supabase
       .from("transcriptions")
-      .insert({
-        recording_id: recording.id,
-        text,
-        is_machine: true,
-        model: "openai/gpt-4o-transcribe",
-        created_by: userId,
-      })
-      .select("id, text, created_at")
+      .upsert(
+        {
+          recording_id: recording.id,
+          auto_text: text,
+          model: "openai/gpt-4o-transcribe",
+        },
+        { onConflict: "recording_id" },
+      )
+      .select("id, auto_text, corrected_text, created_at")
       .single();
 
     if (saveError) throw new Error(saveError.message);
