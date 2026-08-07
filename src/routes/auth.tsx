@@ -16,8 +16,8 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 type Mode = "login" | "register";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>): { mode?: Mode } => ({
-    mode: search["mode"] === "register" ? "register" : undefined,
+  validateSearch: (search: Record<string, unknown>): { mode: Mode } => ({
+    mode: search["mode"] === "register" ? "register" : "login",
   }),
   head: () => ({
     meta: [
