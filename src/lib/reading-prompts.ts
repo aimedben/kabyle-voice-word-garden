@@ -37,5 +37,3 @@ export function filterReadingPrompts(kind: PromptKind, search: string) {
   return readingPrompts.filter((prompt) => prompt.kind === kind &&
     normalize(`${prompt.text} ${prompt.translation}`).includes(query));
 }
-
-export const READING_REQUIRES_ACCOUNT = false;
