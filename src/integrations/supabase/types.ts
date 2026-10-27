@@ -148,6 +148,39 @@ export type Database = {
           },
         ]
       }
+      reading_prompts: {
+        Row: {
+          id: string
+          is_active: boolean
+          kind: string
+          position: number
+          source: string
+          source_name: string
+          text: string
+          translation: string
+        }
+        Insert: {
+          id: string
+          is_active?: boolean
+          kind: string
+          position?: number
+          source: string
+          source_name: string
+          text: string
+          translation: string
+        }
+        Update: {
+          id?: string
+          is_active?: boolean
+          kind?: string
+          position?: number
+          source?: string
+          source_name?: string
+          text?: string
+          translation?: string
+        }
+        Relationships: []
+      }
       recordings: {
         Row: {
           admin_comment: string | null
