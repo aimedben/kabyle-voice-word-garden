@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight, BookOpen, Download, ExternalLink, Mic, Search, Square, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,9 +8,11 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { WavRecorder } from "@/lib/audio";
 import { filterReadingPrompts, type PromptKind } from "@/lib/reading-prompts";
+import { readingPromptsQuery } from "@/lib/reading-prompts.query";
 import heroImage from "@/assets/hero-waveform.jpg";
 
 export function ReadingWorkspace() {
+  const { data: readingPrompts } = useSuspenseQuery(readingPromptsQuery);
   const [kind, setKind] = useState<PromptKind>("phrase");
   const [search, setSearch] = useState("");
   const [index, setIndex] = useState(0);
@@ -20,7 +23,7 @@ export function ReadingWorkspace() {
   const [error, setError] = useState("");
   const recorder = useRef<WavRecorder | null>(null);
   const mounted = useRef(true);
-  const prompts = filterReadingPrompts(kind, search);
+  const prompts = filterReadingPrompts(readingPrompts, kind, search);
   const current = prompts[index];
 
   useEffect(() => {
