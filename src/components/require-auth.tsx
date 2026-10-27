@@ -50,7 +50,7 @@ export function RequireAuth({
             administrator to grant you the role.
           </p>
           <Button asChild className="mt-6 rounded-xl">
-            <Link to="/dashboard">Back to dashboard</Link>
+            <Link to="/read">Back to reading</Link>
           </Button>
         </div>
       </div>
